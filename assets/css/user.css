@@ -1,0 +1,8 @@
+/* 用户中心页面 */
+body{
+    background-color: #f2f3f7;
+    padding: 15px;
+}
+.layui-form{
+    width: 500px;
+}
