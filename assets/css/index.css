@@ -1,0 +1,53 @@
+iframe {
+    width: 100%;
+    height: 100%;
+}
+
+.layui-body {
+    overflow: hidden;
+}
+
+.iconfont, .layui-icon {
+    margin-right: 10px;
+}
+
+.layui-side .layui-nav-child dd {
+    padding-left: 14px;
+}
+
+.avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.user-info {
+    text-align: center;
+    height: 60px;
+    line-height: 60px;
+}
+
+.text-avatar {
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+    text-align: center;
+    line-height: 40px;
+    font-size: 20px;
+    color: #fff;
+    border-radius: 50%;
+    background-color: #009688;
+}
+
+.nickname {
+    font-size: 12px;
+    margin-left: 14px;
+}
+.person-center{
+    margin-left: 10px;
+}
+.layui-footer{
+    text-align: center;
+    font-size: 12px;
+}
