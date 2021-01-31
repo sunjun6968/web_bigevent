@@ -1,5 +1,5 @@
 $(function () {
-   const { form ,layer } =layui 
+    const { form, layer } = layui
     form.verify({
         pass: [
             /^\w{6,12}$/,
@@ -16,7 +16,7 @@ $(function () {
 
 
 
-   })
+    })
     $('.layui-form').submit(function (e) {
         e.preventDefault()
         // 发起请求
@@ -24,11 +24,14 @@ $(function () {
             console.log(res);
             if (res.status !== 0) {
                 return layer.msg('修改密码失败')
-                
+
             }
             layer.msg('修改密码成功 ')
+            localStorage.removeItem('token')
+            // 跳转到登录页
+            window.parent.location.href = './login.html'
         })
-})
+    })
 
 
 
