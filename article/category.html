@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>我的大事件项目</title>
+    <link rel="stylesheet" href="../assets/fonts/iconfont.css">
+    <link rel="stylesheet" href="../assets/lib/layui/css/layui.css">
+    <link rel="stylesheet" href="../assets/css/article.css">
+</head>
+
+<body>
+    <div class="layui-card">
+        <div class="layui-card-header">文章类别管理
+            <button type="button" class="layui-btn layui-btn-normal layui-btn-sm add-btn">添加类别</button>
+        </div>
+
+        <div class="layui-card-body">
+            <table class="layui-table">
+                <colgroup>
+                    <col width="40%">
+                    <col width="40%">
+                    <col>
+                </colgroup>
+                <thead>
+                    <tr>
+                        <th>分类名称</th>
+                        <th>分类别名</th>
+                        <th>
+                            <button type="button" class="layui-btn layui-btn-xs">编辑</button>
+                            <button type="button" class="layui-btn layui-btn-xs layui-btn-danger">删除</button>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>贤心</td>
+                        <td>2016-11-29</td>
+                        <td>人生就像是一场修行</td>
+                    </tr>
+                    <tr>
+                        <td>许闲心</td>
+                        <td>2016-11-28</td>
+                        <td>于千万人之中遇见你所遇见的人，于千万年之中，时间的无涯的荒野里…</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <!-- 添加表单内容 -->
+    <div class="add-form-container" style="display: none;">
+        <form class="layui-form add-form" action="">
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" required lay-verify="required" placeholder="请输入分类名称"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类别名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="alias" required lay-verify="required" placeholder="请输入分类别名"
+                        autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即提交</button>
+                    <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- 编辑表单容器 -->
+    <div class="edit-form-container" style="display: none;">
+        <form class="layui-form edit-form" action="" lay-filter="edit-form">
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类名称</label>
+                <div class="layui-input-block">
+                    <input type="text" name="name" required lay-verify="required" placeholder="分类" autocomplete="off"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">分类别名</label>
+                <div class="layui-input-block">
+                    <input type="text" name="alias" required lay-verify="required" placeholder="别名" autocomplete="off"
+                        class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" lay-submit lay-filter="formDemo">立即修改</button>
+
+                </div>
+            </div>
+            <!-- 自己构建的隐藏文本框 -->
+            <input type="hidden" name="Id">
+        </form>
+    </div>
+    <!-- 删除部分 -->
+
+    <script type="text/html" id="tpl">
+
+        {{each data}}
+        <tr>
+            <th>{{$value.name}}</th>
+            <th>{{$value.alias}}</th>
+            <th>
+                <!-- 添加自定义属性 -->
+                <button data-id="{{$value.Id}}" type="button" class="layui-btn layui-btn-xs edit-btn">编辑</button>
+                <button data-id="{{$value.Id}}" type="button" class="layui-btn layui-btn-xs layui-btn-danger del-btn">删除</button>
+            </th>
+        </tr>
+        {{/each}}
+    </script>
+    <!-- 引入模板引擎插件 -->
+    <script src="../assets/lib/template-web.js"></script>
+    <script src="../assets/lib/jquery.js"></script>
+    <script src="../assets/lib/layui/layui.all.js"></script>
+    <script src="../assets/lib/axios.js"></script>
+    <script src="../assets/js/commonAPI.js"></script>
+    <!-- 引入自己的js文件 -->
+    <script src="../assets/js/article/category.js"></script>
+
+</body>
+
+</html>
