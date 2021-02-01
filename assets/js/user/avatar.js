@@ -4,8 +4,7 @@ $(function () {
     $image.cropper({
         aspectRatio: 1,
         crop: function (event) {
-            //   console.log(event.detail.x);
-            //   console.log(event.detail.y);
+          
         },
         // 指定预览区域,提供元素选择器
         preview: '.img-preview'

@@ -86,10 +86,11 @@ $(function () {
                     return layer.msg('删除失败!')
                 }
                 layer.msg('删除成功')
+                getCateList()
             })
 
             layer.close(index);
-            getCateList()
+            
         });
 
     })
