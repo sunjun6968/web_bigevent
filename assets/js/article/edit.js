@@ -1,8 +1,27 @@
 $(function () {
     // 从服务器获取文章的分类列表
-    const {form}=layui
+    const { form } = layui
+    let state=''
+    console.log(location.search);
+    const arr=location.search.slice(1).split('=')//[id,1729]
+    const id =arr[1]
+    console.log(arr[1]);
+    function getArtDeteList(id) {
+        axios.get(`/my/article/${id}`).then(res => {
+            console.log(res);
+            if (res.status !== 0) {
+                return layer.msg('获取失败!')
+            }
+            // 给form表单赋值
+            form.val('edit-form', res.data)
+            
+            initEditor()
+            $image().cropper('replace','http://api-breakingnews-web.itheima.net'+res.data.cover_img)
+        })
+    }
+    getArtDeteList(id)
     function getCateList() {
-        axios.get('/my/article/cates').then(res => {
+        axios.get(`/my/article/cates`).then(res => {
             console.log(res);
             if (res.status !== 0) {
                 return layer.msg('获取失败!')
@@ -14,11 +33,12 @@ $(function () {
             });
             //动态创建需要手动添加
             form.render('select'); //更新全部
+            getArtDeteList(id)
         })
     }
 
     getCateList()
-    initEditor()
+   
 // 先获取要裁剪的图片/
     const $image =$('#image')
     $image.cropper({
@@ -40,10 +60,8 @@ $(function () {
     $('.publish-form').submit(function (e) {
         // FormData相关方法
         e.preventDefault()
-        const fd = new FormData(this)
-        fd.forEach(item => {
-            console.log(item);
-        })
+       
+       
         // 向fd中新增state文章数据
         fd.append('state', state)
         // 获取裁剪封面图片的二进制数据
@@ -51,9 +69,12 @@ $(function () {
             width: 400,
             height: 280
         }).toBlob(blob => {
+            const fd = new FormData(this)
             console.log(blob);
             // 7.5把获取的图片数据添加到formdata中
+            fd.append('state',state)
             fd.append('cover_img', blob)
+
             publishArticle(fd)
         })
 
@@ -65,7 +86,9 @@ $(function () {
        
     })
     function publishArticle(fd) {
-        axios.post('/my/article/add', fd).then(res => {
+        // 发送之前,我们想formdata数据添加一个id数据
+        fd.append('Id',id)
+        axios.post('/my/article/edit', fd).then(res => {
             console.log(res);
             if (res.status !== 0) {
                 return layer.msg('发布失败!')
@@ -76,7 +99,7 @@ $(function () {
             window.parent.$('.layui-this').prev().find('a').click()
         })
     }
-   
+    
    
 
 })

@@ -32,6 +32,10 @@ $(function () {
             if (res.status !== 0) {
                 return layer.msg('获取失败!')
             }
+            // 注册过滤器
+            template.defaults.imports.dateFormat = function (date) {
+                return moment(date).format('YYYY/MM/DD HH:mm:ss')
+            }
             // 使用模板引擎渲染
             const htmlStr = template('tpl', res)
             // console.log(htmlStr);
@@ -75,6 +79,8 @@ $(function () {
         console.log(cate_id, state);
         query.cate_id = cate_id
         query.state = state
+        // 非首页最后一条数据, 删除时页码值减1
+        query.pagenum = 1
         // 重新调用一下
         renderTable()
     })
@@ -95,6 +101,7 @@ $(function () {
                 if ($('.del-btn').length == 1 && query.pagenum !== 1) {
                     query.pagenum = query.pagenum - 1
                 }
+
                 // 重新渲染表格
                 renderTable()
             })
@@ -104,6 +111,12 @@ $(function () {
         });
 
 
+
+    })
+    $(document).on('click', '.edit-btn', function () {
+        const id=$(this).data('id')
+        location.href=`./edit.html?id=${id}`
+window.parent.$('.layui-this').next().find('a').click()
 
     })
 })

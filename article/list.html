@@ -72,7 +72,8 @@
         <tr>
             <td>{{$value.title}}</td>
             <td>{{$value.cate_name}}</td>
-            <td>{{$value.pub_date}}</td>
+            <!-- 模板中使用过滤器 -->
+            <td>{{$value.pub_date | dateFormat}}</td>
             <td>{{$value.state}}</td>
             <td> <!-- 添加自定义属性 -->
                 <button data-id="{{$value.Id}}" type="button" class="layui-btn layui-btn-xs edit-btn">编辑</button>
@@ -80,6 +81,7 @@
         </tr>
         {{/each}}
     </script>
+    <script src="../assets/lib/moment.js"></script>
     <script src="../assets/lib/template-web.js"></script>
 
     <!-- ......... -->
